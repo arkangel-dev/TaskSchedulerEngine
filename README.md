@@ -59,8 +59,8 @@ static async Task Main(string[] args)
   // Format: minute (0..59), hour (0..23), dayOfMonth (1..31), month (1..12), dayOfWeek (0=Sunday..6).
   // Seconds will always be zero.
   var s4 = runtime.CreateSchedule()
-    .FromCron("0,20,40 * * * *")
-    .WithName("Every20Min") //Optional ID for your reference 
+    .FromCron("0,1/5 * * * *")
+    .WithName("Every5Min") //Optional ID for your reference 
     .Execute(async (e, token) => {
       if(!token.IsCancellationRequested)
         Console.WriteLine($"Load me from config and change me without recompiling!");

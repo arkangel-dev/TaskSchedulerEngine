@@ -118,7 +118,7 @@ namespace TaskSchedulerEngine {
                         break;
 
                     case CronOperand.ADD:
-                        operandParts = new List<int>() { };
+                        //operandParts = new List<int>() { };
                         final_parts.Add((int)previousInt);
                         if (finalCall) 
                             final_parts.Add((int)_currentInnerBuffer);
@@ -149,7 +149,8 @@ namespace TaskSchedulerEngine {
                         break;
                     }
                     performOperation(true);
-                    final_parts.AddRange(operandParts!);
+                    if (operandParts != null)
+                        final_parts.AddRange(operandParts!);
                     break;
                 }
                 if (System.Char.IsDigit(segment[i])) {

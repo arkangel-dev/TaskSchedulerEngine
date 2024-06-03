@@ -60,6 +60,14 @@ namespace TaskSchedulerEngineTests {
             CollectionAssert.AreEqual(expected, results);
         }
 
+        [TestMethod("Nth Selector 3")]
+        public void Nth3() {
+            var expression = "0,1/20";
+            var expected = new int[] { 0, 20, 40 };
+            var results = TaskSchedulerEngine.ScheduleRule.CalculateCronInts(expression, 59);
+            CollectionAssert.AreEqual(expected, results);
+        }
+
         [TestMethod("Nth Selector 2")]
         public void Nth2() {
             var expression = "50/2";
@@ -69,7 +77,7 @@ namespace TaskSchedulerEngineTests {
         }
 
         [TestMethod("Multi Digit Nth Selector")]
-        public void Nth3() {
+        public void MultiDigitNth() {
             var expression = "1/10";
             var expected = new int[] { 10, 20, 30, 40, 50 };
             var results = TaskSchedulerEngine.ScheduleRule.CalculateCronInts(expression, 59);
