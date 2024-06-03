@@ -56,12 +56,21 @@ static async Task Main(string[] args)
     );
 
   // You can also create rules from cron expressions; * or comma separated lists are supported 
-  // (/ and - are NOT supported). 
   // Format: minute (0..59), hour (0..23), dayOfMonth (1..31), month (1..12), dayOfWeek (0=Sunday..6).
   // Seconds will always be zero.
   var s4 = runtime.CreateSchedule()
     .FromCron("0,20,40 * * * *")
-    .WithName("Every20Sec") //Optional ID for your reference 
+    .WithName("Every20Min") //Optional ID for your reference 
+    .Execute(async (e, token) => {
+      if(!token.IsCancellationRequested)
+        Console.WriteLine($"Load me from config and change me without recompiling!");
+        return true; 
+    });
+    
+  // Slash and Dashes are now supported!
+  var s5 = runtime.CreateSchedule()
+    .FromCron("0 1/2 * * 0-4")
+    .WithName("Every2HoursSundayThroughThursday") //Optional ID for your reference 
     .Execute(async (e, token) => {
       if(!token.IsCancellationRequested)
         Console.WriteLine($"Load me from config and change me without recompiling!");
@@ -69,7 +78,7 @@ static async Task Main(string[] args)
     });
 
   // Finally, there are helper methods ExecuteEvery*() that execute a task at a given interval. 
-  var s4 = runtime.CreateSchedule()
+  var s6 = runtime.CreateSchedule()
     // Run the task a 0 minutes and 0 seconds past the hours 0, 6, 12, and 18
     .ExecuteEveryHour(0, 6, 12, 18) 
     .Execute(async (e, token) => {

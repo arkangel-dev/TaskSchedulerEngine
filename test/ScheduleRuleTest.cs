@@ -438,5 +438,6 @@ namespace SchedulerEngineRuntimeTests
             Assert.IsTrue(new ScheduleEvaluationOptimized(rule).EvaluateRuleMatch(new DateTimeOffset(DateTime.Now.Year, 6, 19, 11, 0, 0, TimeSpan.FromHours(-7))));
             Assert.IsFalse(new ScheduleEvaluationOptimized(rule).EvaluateRuleMatch(new DateTimeOffset(DateTime.Now.Year, 6, 19, 11, 0, 0, TimeSpan.Zero)));
         }
+       
     }
 }
